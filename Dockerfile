@@ -8,5 +8,5 @@ COPY tsconfig.build.json .
 COPY nest-cli.json .
 RUN yarn install
 RUN yarn build
-COPY dist .
+COPY --from=build dist .
 CMD [ "node", "dist/main.js" ]
