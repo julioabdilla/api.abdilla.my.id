@@ -6,6 +6,7 @@ services:
       target: run
     restart: unless-stopped
     volumes:
+      - ./node_modules:/app/node_modules
       - ./logs:/app/logs
       - ./dist:/app/dist
       - .sequelizerc:/app/.sequelizerc
