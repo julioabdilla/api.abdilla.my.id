@@ -1,5 +1,5 @@
 services:
-  abdilla.my.id:
+  api:
     build:
       context: .
       dockerfile: Dockerfile
