@@ -10,7 +10,8 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - abdilla.my.id
+      abdilla.my.id:
+        ipv4_address: 172.20.0.9
 networks:
   abdilla.my.id:
     external: true
