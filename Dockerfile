@@ -2,6 +2,8 @@ FROM node:22-alpine AS build
 
 WORKDIR /app
 RUN npm i -g @nestjs/cli
+COPY package*.json .
+COPY yarn* .
 RUN yarn install
 COPY . .
 RUN yarn build
