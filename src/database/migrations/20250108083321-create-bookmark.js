@@ -5,7 +5,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.createTable('bookmarks', {
       id: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.BIGINT.UNSIGNED,
         allowNull: false,
         autoIncrement: true,
         unique: true,
@@ -26,21 +26,24 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      thumbnail: {
-        type: Sequelize.BLOB
+      thumbnail_url: {
+        type: Sequelize.TEXT
+      },
+      meta: {
+        type: Sequelize.TEXT,
       },
       tags: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       deleted_at: {
         type: Sequelize.DATE

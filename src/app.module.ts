@@ -8,6 +8,7 @@ import { CacheModule } from 'src/cache';
 import { OnRequestMiddleware } from 'src/common/middlewares/on_request.middleware';
 import { DatabaseModule } from 'src/database';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { BookmarkModule } from './modules/bookmark/bookmark.module';
     }),
     DatabaseModule,
     CacheModule,
+    MessageModule,
     BookmarkModule
   ],
   controllers: [],

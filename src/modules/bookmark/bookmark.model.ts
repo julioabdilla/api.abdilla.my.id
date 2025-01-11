@@ -2,7 +2,7 @@ import { Table, Column, DataType, Model } from 'sequelize-typescript';
 
 
 @Table({ 
-  tableName: 'bookmark', 
+  tableName: 'bookmarks', 
   paranoid: true,
   underscored: true, // Enable underscored naming for columns
   timestamps: true, // Enable timestamps (createdAt and updatedAt)
@@ -11,7 +11,7 @@ export class Bookmark extends Model {
   public static REPOSITORY_NAME = 'BOOKMARK_MODEL';
 
   @Column({
-    type: DataType.BIGINT,
+    type: DataType.BIGINT.UNSIGNED,
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
@@ -44,14 +44,31 @@ export class Bookmark extends Model {
   link: string;
 
   @Column({
-    field: 'thumbnail',
-    type: DataType.BLOB
+    field: 'thumbnail_url',
+    type: DataType.TEXT
   })
-  thumbnail: Buffer;
+  thumbnailUrl: string;
+
+  @Column({
+    field: 'meta',
+    type: DataType.TEXT,
+  })
+  meta: string;
 
   @Column({
     field: 'tags',
-    type: DataType.STRING
+    type: DataType.TEXT,
+    get() {
+      const rawValue = this.getDataValue('tags');
+      return rawValue ? rawValue.split(',').map(tag => tag.trim()) : [];
+    },
+    set(value: string | string[]) {
+      if (Array.isArray(value)) {
+        this.setDataValue('tags', value.join(','));
+      } else {
+        this.setDataValue('tags', value);
+      }
+    }
   })
-  tags: string;
+  tags: string[];
 }

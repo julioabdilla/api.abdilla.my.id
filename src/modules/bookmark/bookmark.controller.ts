@@ -1,6 +1,6 @@
 import * as querystring from 'querystring';
 
-import { Body, Controller, Get, Param, Post, Query, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Req, Res } from '@nestjs/common';
 import { BookmarkService } from './bookmark.service';
 
 @Controller('/bookmark')
@@ -27,5 +27,10 @@ export class BookmarkController {
   @Get('/:uuid')
   getOne(@Param('uuid') uuid: string) {
     return this.bookmarkService.getOneBookmark(uuid);
+  }
+
+  @Patch('/:uuid/sync-thumbnail')
+  syncThumbnail (@Param('uuid') uuid: string) {
+    return this.bookmarkService.syncThumbnail(uuid);
   }
 }
