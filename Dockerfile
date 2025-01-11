@@ -1,6 +1,7 @@
 FROM node:lts-alpine AS build
 
 WORKDIR /app
+RUN npm i -g @nestjs/cli
 RUN yarn install
 COPY . .
 RUN yarn build
